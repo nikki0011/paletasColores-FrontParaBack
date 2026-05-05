@@ -1,10 +1,19 @@
 import ItemTarea from "./ItemTarea";
 
-const ListaDeTarea = ({ arrayTareasProps, borrarTareaProps}) => {
+interface ListaProps {
+  arrayTareasProps: string[];
+  borrarTareaProps: (nombreTarea: string) => void;
+}
+
+const ListaDeTarea = ({ arrayTareasProps, borrarTareaProps }: ListaProps) => {
   return (
     <ul className="flex flex-col">
       {arrayTareasProps.map((textoTarea, index) => (
-        <ItemTarea key={index} textoTareaProps ={textoTarea} borrarTareaProps={borrarTareaProps}></ItemTarea>
+        <ItemTarea
+          key={index}
+          textoTareaProps={textoTarea}
+          borrarTareaProps={borrarTareaProps}
+        ></ItemTarea>
       ))}
     </ul>
   );

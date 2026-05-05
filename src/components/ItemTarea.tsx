@@ -1,7 +1,12 @@
-const ItemTarea = ({ textoTareaProps, borrarTareaProps }) => {
+interface ItemProps{
+  textoTareaProps:string,
+  borrarTareaProps:(nombreTarea:string)=>void
+}
+
+const ItemTarea = ({ textoTareaProps, borrarTareaProps }:ItemProps) => {
   return (
     <li className="col-end-12 flex justify-between items-center border border-amber-100 p-2">
-      {textoTareaProps}{" "}
+      {textoTareaProps}
       <button
         className="bg-red-700 hover:bg-red-500 rounded-2xl p-3"
         onClick={() => borrarTareaProps(textoTareaProps)}

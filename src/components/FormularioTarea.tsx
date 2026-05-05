@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import ListaDeTarea from "./ListaDeTarea";
 
 const FormularioTarea = () => {
-  const tareasLocalStorage:string[] = JSON.parse(localStorage.getItem("arrayTareasKey") || '[]');
+  const tareasLocalStorage: string[] = JSON.parse(
+    localStorage.getItem("arrayTareasKey") || "[]",
+  );
   const [arrayTareas, setArrayaTareas] = useState<string[]>(tareasLocalStorage);
   const [tarea, setTarea] = useState<string>("");
 
@@ -26,17 +28,16 @@ const FormularioTarea = () => {
     setTarea("");
   };
 
-  const borrarTarea = (nombreTarea) => {
-    const arrayFiltrado = arrayTareas.filter(
-      (itemTarea) => itemTarea !== nombreTarea,
-    );
-
-    setArrayaTareas(arrayFiltrado);
+  const borrarTarea = (nombreTarea: string): void => {
+    setArrayaTareas(arrayTareas.filter((itemTarea) => itemTarea !== nombreTarea));
   };
 
   return (
     <section>
-      <form onSubmit={handleSubmit} className="border border-slate-300 dark:border-slate-700 p-8 rounded-l bg-white dark:bg-slate-800 transition-colors">
+      <form
+        onSubmit={handleSubmit}
+        className="border border-slate-300 dark:border-slate-700 p-8 rounded-l bg-white dark:bg-slate-800 transition-colors"
+      >
         <div className="w-full flex gap-2">
           <input
             type="text"
@@ -46,7 +47,12 @@ const FormularioTarea = () => {
             onChange={(e) => setTarea(e.target.value)}
             value={tarea}
           />
-          <button type="submit" className="bg-green-600 p-2 font-medium rounded-lg">Enviar</button>
+          <button
+            type="submit"
+            className="bg-green-600 p-2 font-medium rounded-lg"
+          >
+            Enviar
+          </button>
         </div>
       </form>
       <ListaDeTarea
