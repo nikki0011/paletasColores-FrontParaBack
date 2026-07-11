@@ -1,36 +1,28 @@
-import { useEffect, useState } from "react";
+
+
 import ListaDeTarea from "./ListaDeTarea";
 
 const FormularioTarea = () => {
-  const tareasLocalStorage: string[] = JSON.parse(
-    localStorage.getItem("arrayTareasKey") || "[]",
-  );
-  const [arrayTareas, setArrayaTareas] = useState<string[]>(tareasLocalStorage);
-  const [tarea, setTarea] = useState<string>("");
-
-  useEffect(() => {
-    console.log("desde el useEffect");
-    localStorage.setItem("arrayTareasKey", JSON.stringify(arrayTareas));
-  }, [arrayTareas]);
+  // const tareasLocalStorage: string[] = JSON.parse(
+  //   localStorage.getItem("arrayTareasKey") || "[]",
+  // );
 
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const tareaBuscada = arrayTareas.find(
-      (itemTarea) => itemTarea.toLowerCase() === tarea.toLowerCase().trim(),
-    );
-    if (tareaBuscada) {
-      return alert("la tarea ya existe");
-    }
+  //   const tareaBuscada = arrayTareas.find(
+  //     (itemTarea) => itemTarea.toLowerCase() === itemTarea.toLowerCase().trim(),
+  //   );
+  //   if (tareaBuscada) {
+  //     return alert("la tarea ya existe");
+  //   }
 
-    setArrayaTareas([...arrayTareas, tarea.toLowerCase().trim()]);
-
-    setTarea("");
+   
   };
 
-  const borrarTarea = (nombreTarea: string): void => {
-    setArrayaTareas(arrayTareas.filter((itemTarea) => itemTarea !== nombreTarea));
-  };
+  // const borrarTarea = (nombreTarea: string): void => {
+  //   setArrayTareas(arrayTareas.filter((itemTarea) => itemTarea !== nombreTarea));
+  // };
 
   return (
     <section>
@@ -44,8 +36,8 @@ const FormularioTarea = () => {
             className="border border-slate-300 p-2 rounded-lg bg-slate-900 text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/60"
             id="inputTarea"
             placeholder="Ingresa una tarea"
-            onChange={(e) => setTarea(e.target.value)}
-            value={tarea}
+            // onChange={(e) => setTarea(e.target.value)}
+            // value={tarea}
           />
           <button
             type="submit"
@@ -56,8 +48,8 @@ const FormularioTarea = () => {
         </div>
       </form>
       <ListaDeTarea
-        arrayTareasProps={arrayTareas}
-        borrarTareaProps={borrarTarea}
+        // arrayTareasProps={arrayTareas}
+        /* // borrarTareaProps={borrarTarea} */
       ></ListaDeTarea>
     </section>
   );

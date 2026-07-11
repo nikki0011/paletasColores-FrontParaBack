@@ -1,5 +1,5 @@
 
-const urlTareas = import.meta.env.VITE_TAREAS
+const urlTareas = import.meta.env.VITE_TAREA
 
 export const listarTareasApi = async ():Promise<Response> =>{
     try{
