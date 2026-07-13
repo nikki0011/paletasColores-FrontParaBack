@@ -43,6 +43,7 @@ const ListaDeTarea = () => {
           key={tarea._id}
           textoTareaProps={tarea.nombreTarea}
           // borrarTareaProps={borrarTareaProps}
+        
         ></ItemTarea>
       ))}
     </ul>
