@@ -1,28 +1,61 @@
+import type { Tarea, TareaFormData } from "../interfaces/tarea";
 
-const urlTareas = import.meta.env.VITE_TAREA
+const urlTarea = import.meta.env.VITE_TAREAS || "";
 
-export const listarTareasApi = async ():Promise<Response> =>{
-    try{
-        const respuesta = await fetch(urlTareas)
-        return respuesta
-    }catch(error){
-        console.error(error)
-        throw error
-    }
+export const obtenerTareasApi = async (): Promise<Tarea[]> => {
+  const respuesta = await fetch(urlTarea);
+
+  if (!respuesta.ok) {
+    throw new Error(`No se pudieron obtener las tareas (${respuesta.status})`);
+  }
+
+  return respuesta.json();
 };
 
-export const crearTareaApi = async (tarea: String):Promise<Response> =>{
-    try{
-        const respuesta = await fetch(urlTareas, {
-            method: 'POST',
-            headers:{
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(tarea)
-        })
-        return respuesta
-    }catch(error){
-        console.error(error)
-        throw error
-    }
+export const crearTareaApi = async (
+  nombreTarea: string
+): Promise<Tarea> => {
+  const respuesta = await fetch(urlTarea, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ nombreTarea }),
+  });
+
+  if (!respuesta.ok) {
+    throw new Error(`No se pudo crear la tarea (${respuesta.status})`);
+  }
+
+  return respuesta.json();
+};
+
+export const actualizarTareaApi = async (
+  id: string,
+  tarea: TareaFormData,
+): Promise<Tarea> => {
+
+  const respuesta = await fetch(`${urlTarea}/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(tarea),
+  });
+
+  if (!respuesta.ok) {
+    throw new Error(`No se pudo actualizar la tarea (${respuesta.status})`);
+  }
+
+  return respuesta.json();
+};
+
+export const borrarTareaApi = async (id: string): Promise<void> => {
+  const respuesta = await fetch(`${urlTarea}/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!respuesta.ok) {
+    throw new Error(`No se pudo borrar la tarea (${respuesta.status})`);
+  }
 };

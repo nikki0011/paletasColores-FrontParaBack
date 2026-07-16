@@ -1,53 +1,29 @@
-import { useEffect, useState } from "react";
 import ItemTarea from "./ItemTarea";
-import { listarTareasApi } from "../helpers/queries";
-import Swal from "sweetalert2";
+import type { Tarea } from "../interfaces/tarea";
 
-// interface ListaProps {
-//   arrayTareasProps: string[];
-//   borrarTareaProps: (nombreTarea: string) => void;
-// }
+interface ListaProps {
+  tareas: Tarea[];
+  borrarTarea: (tarea: Tarea) => void;
+  editarTarea: (tarea: Tarea) => void;
+}
 
-
-const ListaDeTarea = () => {
-  const [arrayTareas, setArrayTareas] = useState<string[]>([]);
-
-  useEffect(() => {
-    cargarTareas()
-  }, []);
-
-  const cargarTareas = async () => {
-    const respuestaTarea = await listarTareasApi();
-    console.log(respuestaTarea);
-    if (respuestaTarea && respuestaTarea.status === 200) {
-      const data = await respuestaTarea.json();
-      console.log(data);
-      setArrayTareas(data);
-    } else {
-      if (respuestaTarea && respuestaTarea.status === 200) {
-        const data = await respuestaTarea.json();
-        setArrayTareas(data);
-      } else {
-        Swal.fire({
-          title: "Ocurrio un error",
-          text: `No se puede mostrar los servicios en este momento`,
-          icon: "success",
-        });
-      }
-    }
+const ListaTarea = ({ tareas, borrarTarea, editarTarea }: ListaProps) => {
+  if (tareas.length === 0) {
+    return <p className="text-zinc-400">No hay tareas disponibles.</p>;
   }
+
   return (
-    <ul className="flex flex-col">
-      {arrayTareas.map((tarea) => (
+    <ul className="flex flex-col gap-2">
+      {tareas.map((tarea) => (
         <ItemTarea
           key={tarea._id}
-          textoTareaProps={tarea.nombreTarea}
-          // borrarTareaProps={borrarTareaProps}
-        
-        ></ItemTarea>
+          tarea={tarea}
+          deleteTarea={borrarTarea}
+          editTarea={editarTarea}
+        />
       ))}
     </ul>
   );
 };
 
-export default ListaDeTarea;
+export default ListaTarea;
