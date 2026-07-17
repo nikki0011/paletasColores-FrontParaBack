@@ -1,6 +1,6 @@
 import type { Tarea, TareaFormData } from "../interfaces/tarea";
 
-const urlTarea = import.meta.env.VITE_TAREAS || "";
+const urlTarea = import.meta.env.VITE_TAREA || "";
 
 export const obtenerTareasApi = async (): Promise<Tarea[]> => {
   const respuesta = await fetch(urlTarea);

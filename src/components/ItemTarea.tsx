@@ -19,9 +19,9 @@ const ItemTarea = ({ tarea, deleteTarea, editTarea }: ItemProps) => {
         </span>
         <span
           className={`rounded-full px-2 py-1 text-xs font-semibold ${
-            tarea.estado
-              ? "bg-emerald-500/20 text-emerald-200"
-              : "bg-zinc-700 text-zinc-300"
+            tarea.estado === "Pendiente"
+              ? "bg-zinc-700 text-zinc-300"
+              : "bg-emerald-500/20 text-emerald-200"
           }`}
         >
           {tarea.estado ? "Terminada" : "Pendiente"}

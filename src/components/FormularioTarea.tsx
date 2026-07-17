@@ -23,13 +23,14 @@ const FormularioTarea = () => {
   } = useForm<TareaFormData>({
     defaultValues: {
       nombreTarea: "",
-      estado: false,
+      estado: "",
     },
   });
 
   const cargarTareas = async () => {
     try {
       const tareasApi = await obtenerTareasApi();
+      // console.log(tareasApi)
       setTareas(tareasApi);
     } catch (error) {
       console.warn("No se pudieron cargar las tareas:", error);
@@ -55,7 +56,7 @@ const FormularioTarea = () => {
         );
 
         setTareaSeleccionada(null);
-        reset({ nombreTarea: "", estado: false });
+        reset({ nombreTarea: "", estado: "" });
         void cargarTareas();
       } catch (error) {
         console.error(error);
@@ -66,9 +67,10 @@ const FormularioTarea = () => {
     }
 
     try {
-      const nuevaTarea = await crearTareaApi(data.nombreTarea);
-      setTareas((prevTareas) => [...prevTareas, nuevaTarea]);
-      reset({ nombreTarea: "", estado: false });
+       await crearTareaApi(data.nombreTarea);
+      // setTareas((prevTareas) => [...prevTareas, nuevaTarea]);
+      void cargarTareas();
+      reset({ nombreTarea: "", estado: "" });
     } catch (error) {
       console.error(error);
       alert("No se pudo crear la tarea.");
@@ -89,7 +91,7 @@ const FormularioTarea = () => {
 
       if (tareaSeleccionada?._id === tarea._id) {
         setTareaSeleccionada(null);
-        reset({ nombreTarea: "", estado: false });
+        reset({ nombreTarea: "", estado: "" });
       }
     } catch (error) {
       console.error(error);
@@ -99,7 +101,7 @@ const FormularioTarea = () => {
 
   const cancelarEdicion = () => {
     setTareaSeleccionada(null);
-    reset({ nombreTarea: "", estado: false });
+    reset({ nombreTarea: "", estado: "" });
   };
 
   return (
