@@ -1,5 +1,5 @@
 import Footer from "./components/Footer";
-import FormularioTarea from "./components/FormularioTarea";
+import FormularioTarea from "./components/FormularioColor";
 import Navbar from "./components/Navbar";
 
 function App() {

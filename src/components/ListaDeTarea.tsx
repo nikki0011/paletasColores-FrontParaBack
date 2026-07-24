@@ -1,10 +1,10 @@
 import ItemTarea from "./ItemTarea";
-import type { Tarea } from "../interfaces/color";
+import type { Color } from "../interfaces/color";
 
 interface ListaProps {
-  tareas: Tarea[];
-  borrarTarea: (tarea: Tarea) => void;
-  editarTarea: (tarea: Tarea) => void;
+  colores: Color[];
+  borrarColor: (color: Color) => void;
+  editarColor: (color: Color) => void;
 }
 
 const ListaTarea = ({ tareas, borrarTarea, editarTarea }: ListaProps) => {

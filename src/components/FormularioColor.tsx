@@ -1,17 +1,13 @@
 import { useEffect, useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import ListaTarea from "./ListaDeTarea";
-import type { Tarea, TareaFormData } from "../interfaces/color";
-import {
-  crearTareaApi,
-  obtenerTareasApi,
-  actualizarTareaApi,
-  borrarTareaApi,
-} from "../helpers/queries";
+import type { Color, ColorFormData } from "../interfaces/color";
+import { actualizarColorApi, borrarColorApi, crearColorApi, obtenerColoresApi } from "../helpers/queries";
 
-const FormularioTarea = () => {
-  const [tareas, setTareas] = useState<Tarea[]>([]);
-  const [tareaSeleccionada, setTareaSeleccionada] = useState<Tarea | null>(
+
+const FormularioColor = () => {
+  const [colores, setColores] = useState<Color[]>([]);
+  const [colorSeleccionado, setColorSeleccionado] = useState<Color | null>(
     null,
   );
 
@@ -20,88 +16,87 @@ const FormularioTarea = () => {
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<TareaFormData>({
+  } = useForm<ColorFormData>({
     defaultValues: {
-      nombreTarea: "",
-      estado: "",
+      nombreColor: "",
     },
   });
 
-  const cargarTareas = async () => {
+  const cargarColores = async () => {
     try {
-      const tareasApi = await obtenerTareasApi();
+      const coloresApi = await obtenerColoresApi();
       // console.log(tareasApi)
-      setTareas(tareasApi);
+      setColores(coloresApi);
     } catch (error) {
-      console.warn("No se pudieron cargar las tareas:", error);
+      console.warn("No se pudieron cargar los colores:", error);
     }
   };
 
   useEffect(() => {
-    void cargarTareas();
+    void cargarColores();
   }, []);
 
-  const onSubmit: SubmitHandler<TareaFormData> = async (data) => {
-    if (tareaSeleccionada) {
+  const onSubmit: SubmitHandler<ColorFormData> = async (data) => {
+    if (colorSeleccionado) {
       try {
-        const tareaActualizada = await actualizarTareaApi(
-          tareaSeleccionada._id,
+        const colorActualizado = await actualizarColorApi(
+          colorSeleccionado._id,
           data,
         );
 
-        setTareas((prevTareas) =>
-          prevTareas.map((tarea) =>
-            tarea._id === tareaActualizada._id ? tareaActualizada : tarea,
+        setColores((prevColores) =>
+          prevColores.map((color) =>
+            color._id === colorActualizado._id ? colorActualizado : color,
           ),
         );
 
-        setTareaSeleccionada(null);
-        reset({ nombreTarea: "", estado: "" });
-        void cargarTareas();
+        setColorSeleccionado(null);
+        reset({ nombreColor: ""});
+        void cargarColores();
       } catch (error) {
         console.error(error);
-        alert("No se pudo actualizar la tarea.");
+        alert("No se pudo actualizar el color.");
       }
 
       return;
     }
 
     try {
-       await crearTareaApi(data.nombreTarea);
-      // setTareas((prevTareas) => [...prevTareas, nuevaTarea]);
-      void cargarTareas();
-      reset({ nombreTarea: "", estado: "" });
+       await crearColorApi(data.nombreColor);
+      // setColores((prevColores) => [...prevColores, nuevoColor]);
+      void cargarColores();
+      reset({ nombreColor: ""});
     } catch (error) {
       console.error(error);
-      alert("No se pudo crear la tarea.");
+      alert("No se pudo crear el color.");
     }
   };
 
-  const editarTarea = (tarea: Tarea) => {
-    setTareaSeleccionada(tarea);
-    reset({ nombreTarea: tarea.nombreTarea, estado: tarea.estado });
+  const editarColor = (color: Color) => {
+    setColorSeleccionado(color);
+    reset({ nombreColor: color.nombreColor });
   };
 
-  const borrarTarea = async (tarea: Tarea) => {
+  const borrarColor = async (color: Color) => {
     try {
-      await borrarTareaApi(tarea._id);
-      setTareas((prevTareas) =>
-        prevTareas.filter((item) => item._id !== tarea._id),
+      await borrarColorApi(color._id);
+      setColores((prevColores) =>
+        prevColores.filter((item) => item._id !== color._id),
       );
 
-      if (tareaSeleccionada?._id === tarea._id) {
-        setTareaSeleccionada(null);
-        reset({ nombreTarea: "", estado: "" });
+      if (colorSeleccionado?._id === color._id) {
+        setColorSeleccionado(null);
+        reset({ nombreColor: "" });
       }
     } catch (error) {
       console.error(error);
-      alert("No se pudo borrar la tarea.");
+      alert("No se pudo borrar el color.");
     }
   };
 
   const cancelarEdicion = () => {
-    setTareaSeleccionada(null);
-    reset({ nombreTarea: "", estado: "" });
+    setColorSeleccionado(null);
+    reset({ nombreColor: ""});
   };
 
   return (
@@ -116,14 +111,14 @@ const FormularioTarea = () => {
               className="block text-sm font-medium text-zinc-200 mb-2"
               htmlFor="nombre"
             >
-              Nombre de la tarea
+              Nombre del color
             </label>
             <input
               id="nombre"
               type="text"
               className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
               placeholder="Ingresa una tarea"
-              {...register("nombreTarea", {
+              {...register("nombreColor", {
                 required: "El nombre es obligatorio",
                 minLength: {
                   value: 3,
@@ -131,9 +126,9 @@ const FormularioTarea = () => {
                 },
               })}
             />
-            {errors.nombreTarea && (
+            {errors.nombreColor && (
               <p className="mt-2 text-sm text-pink-400">
-                {errors.nombreTarea.message}
+                {errors.nombreColor.message}
               </p>
             )}
           </div>
@@ -143,10 +138,10 @@ const FormularioTarea = () => {
             disabled={isSubmitting}
             className="h-fit rounded bg-cyan-600 px-4 py-2 font-bold text-white transition hover:bg-cyan-500 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {tareaSeleccionada ? "Actualizar tarea" : "Agregar tarea"}
+            {colorSeleccionado ? "Actualizar tarea" : "Agregar tarea"}
           </button>
         </div>
-
+{/* 
         <label className="inline-flex items-center gap-2 text-sm text-zinc-200">
           <input
             type="checkbox"
@@ -154,16 +149,16 @@ const FormularioTarea = () => {
             {...register("estado")}
           />
           <span>Tarea terminada</span>
-        </label>
+        </label> */}
 
         <p className="text-sm text-zinc-400">
           El checkbox sin seleccionar indica que la tarea está pendiente.
         </p>
 
-        {tareaSeleccionada && (
+        {colorSeleccionado && (
           <div className="flex flex-wrap items-center gap-3">
             <span className="text-sm text-zinc-300">
-              Editando tarea: <strong>{tareaSeleccionada.nombreTarea}</strong>
+              Editando tarea: <strong>{colorSeleccionado.nombreColor}</strong>
             </span>
             <button
               type="button"
@@ -177,12 +172,12 @@ const FormularioTarea = () => {
       </form>
 
       <ListaTarea
-        tareas={tareas}
-        borrarTarea={borrarTarea}
-        editarTarea={editarTarea}
+        colores={colores}
+        borrarColor={borrarColor}
+        editarColor={editarColor}
       />
     </section>
   );
 };
 
-export default FormularioTarea;
+export default FormularioColor;
