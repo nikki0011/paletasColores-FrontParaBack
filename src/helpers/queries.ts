@@ -1,62 +1,62 @@
-import type { Color } from "../interfaces/color";
+import type { Color, ColorFormData } from "../interfaces/color";
 
 
-const urlTarea = import.meta.env.VITE_TAREA || "";
+const urlColor = import.meta.env.VITE_COLOR || "";
 
-export const obtenerTareasApi = async (): Promise<Color[]> => {
-  const respuesta = await fetch(urlTarea);
+export const obtenerColoresApi = async (): Promise<Color[]> => {
+  const respuesta = await fetch(urlColor);
 
   if (!respuesta.ok) {
-    throw new Error(`No se pudieron obtener las tareas (${respuesta.status})`);
+    throw new Error(`No se pudieron obtener los colores (${respuesta.status})`);
   }
 
   return respuesta.json();
 };
 
-export const crearTareaApi = async (
-  nombreTarea: string
-): Promise<Tarea> => {
-  const respuesta = await fetch(urlTarea, {
+export const crearColorApi = async (
+  nombreColor: string
+): Promise<Color> => {
+  const respuesta = await fetch(urlColor, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ nombreTarea }),
+    body: JSON.stringify({ nombreColor}),
   });
 
   if (!respuesta.ok) {
-    throw new Error(`No se pudo crear la tarea (${respuesta.status})`);
+    throw new Error(`No se pudo crear el color (${respuesta.status})`);
   }
 
   return respuesta.json();
 };
 
-export const actualizarTareaApi = async (
+export const actualizarColorApi = async (
   id: string,
-  tarea: TareaFormData,
-): Promise<Tarea> => {
+  color: ColorFormData,
+): Promise<Color> => {
 
-  const respuesta = await fetch(`${urlTarea}/${id}`, {
+  const respuesta = await fetch(`${urlColor}/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(tarea),
+    body: JSON.stringify(color),
   });
 
   if (!respuesta.ok) {
-    throw new Error(`No se pudo actualizar la tarea (${respuesta.status})`);
+    throw new Error(`No se pudo actualizar el color (${respuesta.status})`);
   }
 
   return respuesta.json();
 };
 
-export const borrarTareaApi = async (id: string): Promise<void> => {
-  const respuesta = await fetch(`${urlTarea}/${id}`, {
+export const borrarColorApi = async (id: string): Promise<void> => {
+  const respuesta = await fetch(`${urlColor}/${id}`, {
     method: "DELETE",
   });
 
   if (!respuesta.ok) {
-    throw new Error(`No se pudo borrar la tarea (${respuesta.status})`);
+    throw new Error(`No se pudo borrar el color (${respuesta.status})`);
   }
 };
