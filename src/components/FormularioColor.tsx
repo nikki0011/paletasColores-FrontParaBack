@@ -101,6 +101,8 @@ const FormularioColor = () => {
 
   return (
     <section className="mt-6">
+      <div className="flex flex-md-row justify-start items-center gap-3 mx-auto p-5 border border-black rounded-2xl bg-gray-950 mb-3.5">
+      <div className="w-40 h-40 bg-blue-950 rounded-2xl"></div>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-4 mb-6"
@@ -138,7 +140,7 @@ const FormularioColor = () => {
             disabled={isSubmitting}
             className="h-fit rounded bg-cyan-600 px-4 py-2 font-bold text-white transition hover:bg-cyan-500 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {colorSeleccionado ? "Actualizar tarea" : "Agregar tarea"}
+            {colorSeleccionado ? "Actualizar Color" : "Agregar Color"}
           </button>
         </div>
 {/* 
@@ -148,17 +150,17 @@ const FormularioColor = () => {
             className="h-4 w-4 rounded border-zinc-700 bg-zinc-900 text-cyan-500 focus:ring-cyan-500"
             {...register("estado")}
           />
-          <span>Tarea terminada</span>
+          <span>Color terminado</span>
         </label> */}
-
+{/* 
         <p className="text-sm text-zinc-400">
           El checkbox sin seleccionar indica que la tarea está pendiente.
-        </p>
+        </p> */}
 
         {colorSeleccionado && (
           <div className="flex flex-wrap items-center gap-3">
             <span className="text-sm text-zinc-300">
-              Editando tarea: <strong>{colorSeleccionado.nombreColor}</strong>
+              Editando Color: <strong>{colorSeleccionado.nombreColor}</strong>
             </span>
             <button
               type="button"
@@ -170,7 +172,7 @@ const FormularioColor = () => {
           </div>
         )}
       </form>
-
+</div>
       <ListaColores
         colores={colores}
         borrarColor={borrarColor}

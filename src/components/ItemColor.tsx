@@ -22,14 +22,14 @@ const ItemColor = ({ color, borrarColor, editarColor }: ItemProps) => {
       <div className="flex gap-2">
         <button
           type="button"
-          className="rounded border border-cyan-600 px-3 py-1 text-sm text-cyan-300 transition hover:bg-cyan-600/10"
+          className="rounded border border-amber-400 px-3 py-1 text-sm text-amber-300 transition hover:bg-amber-600/30"
           onClick={() => editarColor(color)}
         >
           Editar
         </button>
         <button
           type="button"
-          className="rounded border border-pink-500 px-3 py-1 text-sm text-pink-400 transition hover:bg-pink-500/10"
+          className="rounded border border-red-800 px-3 py-1 text-sm text-red-400 transition hover:bg-red-500/30"
           onClick={() => borrarColor(color)}
         >
           Borrar
