@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import ListaTarea from "./ListaDeTarea";
+import ListaColores from "./ListaDeColores";
 import type { Color, ColorFormData } from "../interfaces/color";
 import { actualizarColorApi, borrarColorApi, crearColorApi, obtenerColoresApi } from "../helpers/queries";
 
@@ -171,7 +171,7 @@ const FormularioColor = () => {
         )}
       </form>
 
-      <ListaTarea
+      <ListaColores
         colores={colores}
         borrarColor={borrarColor}
         editarColor={editarColor}
