@@ -1,5 +1,5 @@
 import ItemTarea from "./ItemTarea";
-import type { Tarea } from "../interfaces/tarea";
+import type { Tarea } from "../interfaces/color";
 
 interface ListaProps {
   tareas: Tarea[];

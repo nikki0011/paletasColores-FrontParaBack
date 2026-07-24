@@ -1,4 +1,4 @@
-import type { Tarea } from "../interfaces/tarea";
+import type { Tarea } from "../interfaces/color";
 
 interface ItemProps {
   tarea: Tarea;

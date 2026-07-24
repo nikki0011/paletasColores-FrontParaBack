@@ -1,4 +1,4 @@
-import type { Tarea, TareaFormData } from "../interfaces/tarea";
+import type { Tarea, TareaFormData } from "../interfaces/color";
 
 const urlTarea = import.meta.env.VITE_TAREA || "";
 

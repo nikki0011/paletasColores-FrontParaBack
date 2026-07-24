@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import ListaTarea from "./ListaDeTarea";
-import type { Tarea, TareaFormData } from "../interfaces/tarea";
+import type { Tarea, TareaFormData } from "../interfaces/color";
 import {
   crearTareaApi,
   obtenerTareasApi,
