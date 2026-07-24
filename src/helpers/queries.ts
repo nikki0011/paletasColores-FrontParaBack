@@ -1,8 +1,9 @@
-import type { Tarea, TareaFormData } from "../interfaces/color";
+import type { Color } from "../interfaces/color";
+
 
 const urlTarea = import.meta.env.VITE_TAREA || "";
 
-export const obtenerTareasApi = async (): Promise<Tarea[]> => {
+export const obtenerTareasApi = async (): Promise<Color[]> => {
   const respuesta = await fetch(urlTarea);
 
   if (!respuesta.ok) {
