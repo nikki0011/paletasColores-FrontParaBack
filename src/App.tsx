@@ -7,7 +7,7 @@ function App() {
     <>
       <Navbar></Navbar>
       <main className="grow container mx-auto border-amber-50">
-        <h1 className="text-center text-3xl my-3">Lista de Tareas</h1>
+        <h1 className="text-center text-3xl my-3">Paleta de Colores</h1>
         <FormularioTarea></FormularioTarea>
       </main>
       <Footer></Footer>
