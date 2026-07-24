@@ -3,4 +3,4 @@ export interface Color {
   nombreColor: string;
 }
 
-export type TareaFormData = Pick<Color, "nombreColor">;
+export type ColorFormData = Pick<Color, "nombreColor">;
