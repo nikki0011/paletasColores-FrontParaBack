@@ -11,12 +11,17 @@ const ItemColor = ({ color, borrarColor, editarColor }: ItemProps) => {
     <li className="flex flex-col gap-3 rounded border border-zinc-700 bg-zinc-800 p-3 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex items-center gap-3">
         <span
-          // className={`text-sm font-medium ${
+          className="text-2xl font-medium"
           //   tarea.estado ? "text-zinc-400 line-through" : "text-zinc-200"
           // }`}
         >
           {color.nombreColor}
         </span>
+        <div
+            className="w-10 h-10 bg-blue-950 rounded-2xl"
+            style={{ backgroundColor: color.nombreColor }}
+          ></div>
+          
       </div>
 
       <div className="flex gap-2">

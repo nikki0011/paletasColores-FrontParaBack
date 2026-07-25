@@ -100,7 +100,7 @@ const FormularioColor = () => {
   };
 
   return (
-    <section className="mt-6">
+    <section className="my-6">
       <div className="flex flex-md-row justify-start items-center gap-3 mx-auto p-5 border border-black rounded-2xl bg-gray-950 mb-3.5">
       <div className="w-40 h-40 bg-blue-950 rounded-2xl"></div>
       <form
@@ -119,7 +119,7 @@ const FormularioColor = () => {
               id="nombre"
               type="text"
               className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
-              placeholder="Ingresa una tarea"
+              placeholder="Ingresa nombre de color"
               {...register("nombreColor", {
                 required: "El nombre es obligatorio",
                 minLength: {
